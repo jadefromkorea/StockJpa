@@ -5,7 +5,7 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>jpabook</groupId>
+    <groupId>com.jade</groupId>
     <artifactId>StockJpa</artifactId>
     <version>1.0-SNAPSHOT</version>
     <name>jpa-shop</name>

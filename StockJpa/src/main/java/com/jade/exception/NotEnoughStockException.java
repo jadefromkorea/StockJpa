@@ -1,4 +1,4 @@
-package jpabook.jpashop.exception;
+package com.jade.exception;
 
 /**
  * 재고 부족 예외

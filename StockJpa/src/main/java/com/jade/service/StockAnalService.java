@@ -1,4 +1,4 @@
-package jpabook.jpashop.service;
+package com.jade.service;
 
 import java.util.List;
 
@@ -6,9 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import jpabook.jpashop.domain.StockItem;
-import jpabook.jpashop.domain.StockItemDetail;
-import jpabook.jpashop.repository.StockAnalRepository;
+import com.jade.domain.StockItem;
+import com.jade.domain.StockItemDetail;
+import com.jade.repository.StockAnalRepository;
 
 /**
  * User: HolyEyE
@@ -29,7 +29,7 @@ public class StockAnalService {
     }
 
     public List<StockItem> findItems() {
-        return stockAnalRepository.findAll();
+        return stockAnalRepository.findAllByOrderByStockRankDesc();
     }
 
     public StockItem findOne(String stockNo) {

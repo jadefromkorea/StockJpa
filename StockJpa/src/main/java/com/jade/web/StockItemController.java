@@ -1,4 +1,4 @@
-package jpabook.jpashop.web;
+package com.jade.web;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import jpabook.jpashop.domain.StockItem;
-import jpabook.jpashop.domain.StockItemDetail;
-import jpabook.jpashop.service.StockAnalService;
+import com.jade.domain.StockItem;
+import com.jade.domain.StockItemDetail;
+import com.jade.service.StockAnalService;
 
 @Controller
 public class StockItemController {
@@ -95,7 +95,7 @@ public class StockItemController {
 		Elements stockItemsDetail;
 		
 		int k = 1;
-//		do {
+		do {
 			docDetail = Jsoup.connect(urlDetail+k).get();
 			
 			if(docDetail != null) {
@@ -132,8 +132,9 @@ public class StockItemController {
 				}
 			}
 			
-//			k++;
-//		} while(docDetail != null);
+			k++;
+		} while(k<3);
+//	    } while(docDetail != null);
 		
 	}
 	

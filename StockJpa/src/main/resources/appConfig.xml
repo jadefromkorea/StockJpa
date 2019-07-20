@@ -6,7 +6,7 @@
 
     <tx:annotation-driven/>
 
-    <context:component-scan base-package="jpabook.jpashop.service, jpabook.jpashop.repository"/>
+    <context:component-scan base-package="com.jade.service, com.jade.repository"/>
 
 
 	<bean id="dataSource" class="org.apache.tomcat.jdbc.pool.DataSource">
@@ -34,7 +34,7 @@
 
     <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
         <property name="dataSource" ref="dataSource"/>
-        <property name="packagesToScan" value="jpabook.jpashop.domain"/> <!-- @Entity 탐색 시작 위치 -->
+        <property name="packagesToScan" value="com.jade.domain"/> <!-- @Entity 탐색 시작 위치 -->
         <property name="jpaVendorAdapter">
             <!-- 하이버네이트 구현체 사용 -->
             <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"/>

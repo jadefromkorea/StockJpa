@@ -1,4 +1,4 @@
-package jpabook.jpashop.web;
+package com.jade.web;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

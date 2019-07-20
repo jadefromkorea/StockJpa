@@ -1,21 +1,23 @@
-package jpabook.jpashop.domain;
+package com.jade.domain;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
 @Entity
 public class StockItem {
 
 	@Id
-//	@OneToMany
-//	@JoinColumn(name = "stockNo")
 	private String stockNo;	// 종목코드
 	
 	private String stockNm;	// 주식회사명
 	private int stockRank;	// 코스피 순위
+	
+	@OneToMany(mappedBy = "stockItem")
+	private List<StockItemDetail> stockItemDetail = new ArrayList<StockItemDetail>();
 	
 	public String getStockNo() {
 		return stockNo;
@@ -34,5 +36,11 @@ public class StockItem {
 	}
 	public void setStockRank(int stockRank) {
 		this.stockRank = stockRank;
+	}
+	public List<StockItemDetail> getStockItemDetail() {
+		return stockItemDetail;
+	}
+	public void setStockItemDetail(List<StockItemDetail> stockItemDetail) {
+		this.stockItemDetail = stockItemDetail;
 	}
 }

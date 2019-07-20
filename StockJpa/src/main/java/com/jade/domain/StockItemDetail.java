@@ -1,20 +1,24 @@
-package jpabook.jpashop.domain;
+package com.jade.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
+@IdClass(StockItemDetailPK.class)
 public class StockItemDetail {
 
-	@Id @GeneratedValue
-    @Column(name = "STOCK_DETAIL_NO")
-    private Long no;
+//	@Id @GeneratedValue
+//    @Column(name = "STOCK_DETAIL_NO")
+//    private Long no;
 	
-//	@ManyToOne
-//	@JoinColumn(name = "stockNo")
+	@Id
+	@Column(name = "DDETAIL_STOCK_NO")
 	private String stockNo;	// 종목코드
+	@Id
 	private String stockDate;		// 날짜
 	private int openingPrice;	// 시가
 	private int closingPrice;	// 종가
@@ -24,6 +28,10 @@ public class StockItemDetail {
 	private String netChangeSign;		// 전일대비 상승, 하락
 	private int netChange;		// 전일대비 종가
 	
+	@ManyToOne
+	@JoinColumn(name ="stockNo")
+	private StockItem stockItem;
+//	private StockItem stockItem;
 //	private String curTime;		// 현재시간
 //	private int cutPrice;		// 현재가
 //	private int compPrice;		// 전일대비
@@ -82,5 +90,11 @@ public class StockItemDetail {
 	}
 	public void setNetChange(int netChange) {
 		this.netChange = netChange;
+	}
+	public StockItem getStockItem() {
+		return stockItem;
+	}
+	public void setStockItem(StockItem stockItem) {
+		this.stockItem = stockItem;
 	}
 }

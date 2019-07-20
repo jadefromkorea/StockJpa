@@ -1,4 +1,4 @@
-package jpabook.jpashop.repository;
+package com.jade.repository;
 
 import java.util.List;
 
@@ -7,8 +7,8 @@ import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Repository;
 
-import jpabook.jpashop.domain.StockItem;
-import jpabook.jpashop.domain.StockItemDetail;
+import com.jade.domain.StockItem;
+import com.jade.domain.StockItemDetail;
 
 /**
  * User: HolyEyE
@@ -41,7 +41,7 @@ public class StockAnalRepository {
         return em.find(StockItem.class, stockNo);
     }
 
-    public List<StockItem> findAll() {
+    public List<StockItem> findAllByOrderByStockRankDesc() {
         return em.createQuery("select i from StockItem i", StockItem.class).getResultList();
     }
 }
