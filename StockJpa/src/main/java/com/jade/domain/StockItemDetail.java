@@ -10,10 +10,6 @@ import javax.persistence.ManyToOne;
 @Entity
 @IdClass(StockItemDetailPK.class)
 public class StockItemDetail {
-
-//	@Id @GeneratedValue
-//    @Column(name = "STOCK_DETAIL_NO")
-//    private Long no;
 	
 	@Id
 	@Column(name = "DDETAIL_STOCK_NO")

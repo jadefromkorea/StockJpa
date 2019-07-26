@@ -35,4 +35,8 @@ public class StockAnalService {
     public StockItem findOne(String stockNo) {
         return stockAnalRepository.findOne(stockNo);
     }
+    
+    public String findOneMaxStockDateDetail() {
+    	return stockAnalRepository.findOneMaxStockDateDetail();
+    }
 }

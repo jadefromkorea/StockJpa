@@ -29,11 +29,6 @@ public class StockItemController {
 	@RequestMapping("/setListStockItemInfoList.do")
 	public String setListStockItemInfoList(Model model) throws IOException {
 		
-//		List<StockItemVO> stockItemList = new ArrayList<StockItemVO>();
-		
-//		int delRow = this.deleteAllStockItemInfo();
-//		logger.info("!!!!! delRow: " + delRow);
-		
 		String url = "https://finance.naver.com/sise/entryJongmok.nhn?&page=";
 		Document doc;
 		Elements stockItems;
@@ -44,7 +39,8 @@ public class StockItemController {
 			doc = Jsoup.connect(url+i).get();
 			stockItems = doc.select("a[href*=/item/]");
 					
-			for(int j=0; j<stockItems.size(); j++) {
+//			for(int j=0; j<stockItems.size(); j++) {
+			for(int j=0; j<2; j++) {
 				Element stock = stockItems.get(j); 
 				
 				String stockNm = stock.text();
@@ -68,7 +64,9 @@ public class StockItemController {
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy.MM.dd hh:mm:ss");
 		Date curDate =  new Date();
 		String today = formatter.format(curDate);
-		System.out.println("#####!!!!!today: " + today);
+//		System.out.println("#####!!!!!today: " + today);
+		
+		
 		
 		return "redirect:/getStockItemInfoList.do";
         
@@ -90,6 +88,15 @@ public class StockItemController {
 		StockItemDetail stockItemDetail = new StockItemDetail();
 		stockItemDetail.setStockNo(stockNo);
 		
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy.MM.dd");
+		Date curDate =  new Date();
+		String today = formatter.format(curDate);
+//		System.out.println("#####!!!!!today: " + today);
+		
+		String maxStockDate = stockAnalService.findOneMaxStockDateDetail();
+		maxStockDate = maxStockDate==null? "0000.00.00":maxStockDate;
+//		System.out.println("###@@@@@@@@@@@@@@@@maxStockDate: " + maxStockDate);
+		
 		String urlDetail = "https://finance.naver.com/item/sise_day.nhn?code="+stockNo+"&page=";
 		Document docDetail;
 		Elements stockItemsDetail;
@@ -97,19 +104,21 @@ public class StockItemController {
 		int k = 1;
 		do {
 			docDetail = Jsoup.connect(urlDetail+k).get();
-			
+//			System.out.println("###@@@@@@@@@@@@@@@@ today.compareTo(maxStockDate): " + today.compareTo(maxStockDate));
 			if(docDetail != null) {
+//			if(today.compareTo(maxStockDate) > 0) {
 				stockItemsDetail = docDetail.select("table.type2 td:has(span)");
 				
 				for(int j=0; j<stockItemsDetail.size(); j++) {
 					Element stockDetail = stockItemsDetail.get(j);
 					String stockTxt = stockDetail.text();
 					
-					System.out.println("alt: " + stockDetail.toString().contains("alt=\"하락\""));
-					System.out.println("stockDetail: " + stockDetail);
-					System.out.println("!!!stockTxt: " + stockTxt);
-					System.out.println("!!!후 j: " + j);
+//					System.out.println("alt: " + stockDetail.toString().contains("alt=\"하락\""));
+//					System.out.println("stockDetail: " + stockDetail);
+//					System.out.println("!!!stockTxt: " + stockTxt);
+//					System.out.println("!!!후 j: " + j);
 						if(j%7 == 0) {stockItemDetail.setStockDate(stockTxt);}
+//						if(today.compareTo(maxStockDate) > 0) {
 						if(j%7 == 1) {stockItemDetail.setClosingPrice(Integer.valueOf(stockTxt.replaceAll(",", "")));}
 						if(j%7 == 2) {
 							stockItemDetail.setNetChange(Integer.valueOf(stockTxt.replaceAll(",", "")));
@@ -133,7 +142,7 @@ public class StockItemController {
 			}
 			
 			k++;
-		} while(k<3);
+		} while(k<2);
 //	    } while(docDetail != null);
 		
 	}

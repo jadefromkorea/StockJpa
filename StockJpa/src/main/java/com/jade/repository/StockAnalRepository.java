@@ -44,4 +44,8 @@ public class StockAnalRepository {
     public List<StockItem> findAllByOrderByStockRankDesc() {
         return em.createQuery("select i from StockItem i", StockItem.class).getResultList();
     }
+    
+    public String findOneMaxStockDateDetail() {
+    	return (String) em.createQuery("select max(s.stockDate) from StockItemDetail s").getSingleResult();
+    }
 }
